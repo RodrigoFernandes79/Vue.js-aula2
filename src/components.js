@@ -94,7 +94,7 @@ Vue.component('ButtonRender', {
                 }, [
                     //e recebe como terceiro parametro o texto o qual queremos rendeirizar na tela:
 
-                    'Click ButtonRender ${this.count} times'
+                    `Click ButtonRender ${this.count} times`
                 ]
             );
         }

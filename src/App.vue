@@ -21,6 +21,12 @@ Click ButtonInlineTemplatesVue {{count}} times
  {{$data.$count1}}
  <!--para executar a variável iniciada com 'underline' coloca se o $data na frente-->
  {{ $data._count2}}
+<!--executando métodos e funções-->
+ <button @click="increment(2)">Click</button>
+ {{ count }}
+<!--no computed não precisa colocar o nome do metodo no evento e sim direto no binding-->
+ <button @click="fullNameComputed ='Alvaro Dantas'">Click</button>
+ {{ fullNameComputed }}
 </div>
 </template>
 
@@ -42,6 +48,8 @@ export default {
       count3: {
         x: 0, // => podemos declarar uma propriedade dentro do objeto
       },
+      firstName: 'Rodrigo',
+      lastName: 'Fernandes',
     };
   },
   // função mounted() é colocado quando o componente for montado.
@@ -55,6 +63,29 @@ você terá acesso completo ao componente reativo, modelos e DOM renderizado */
     //= > podemos colocar varias outras propriedades dentro de um mesmo objeto(count3)
     this.count3 = { ...this.count3, ...{ a: 1, b: 2 } };/* recebe uma copia dele mesmo como primeiro
 parâmetro e as propriedades que eu quero colocar. */
+  },
+  /* propriedade computed é parecido com methods, porem não precisa instanciar o nome do metodo
+e sim o nome da propriedade retornada.
+possui getters and setters e so alteram quando a propriedade é alterada */
+  computed: {
+    fullNameComputed: {
+      get() {
+        return `${this.firstName}  ${this.lastName}`;
+      },
+      set(value) {
+        const [first, last] = value.split(' ');
+        this.firstName = first;
+        this.lastName = last;
+      },
+    },
+  },
+  // criando métodos para funcionalidades maiores ou reaproveitar em outros códigos:
+  methods: {
+    increment(value) {
+      // aqui no escopo methods não funciona arrow functions:
+      // eslint-disable-next-line no-plusplus
+      this.count += value;
+    },
   },
 
 };
