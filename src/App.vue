@@ -1,12 +1,32 @@
+/* eslint-disable */
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
-  </div>
+<ButtonVue></ButtonVue>
+<ButtonString></ButtonString>
+<ButtonTemplateString></ButtonTemplateString>
+<Button-x-template></Button-x-template>
+<!--fazendo o Inline template:-->
+<ButtonInlineTemplate inline-template>
+<button @click="clicar">
+Click ButtonInlineTemplatesVue {{count}} times
+</button>
+</ButtonInlineTemplate>
+<!--fazendo o Render-->
+<ButtonRender></ButtonRender>
+<ButtonJSK></ButtonJSK>
+</div>
 </template>
+<script>
+import ButtonVue from './ButtonVue.vue';
+
+export default {
+  name: 'app',
+  components: {
+    ButtonVue,
+
+  },
+};
+</script>
 
 <style lang="scss">
 #app {
