@@ -27,6 +27,10 @@ Click ButtonInlineTemplatesVue {{count}} times
 <!--no computed não precisa colocar o nome do metodo no evento e sim direto no binding-->
  <button @click="fullNameComputed ='Alvaro Dantas'">Click</button>
  {{ fullNameComputed }}
+ <!--Trabalhando com Watchers-->
+ <input  v-model="text"> <!--v-model funciona como two way databind-->
+ <p>Text: {{text}}</p>
+ <p>API: {{ apiResponse }}</p>
 </div>
 </template>
 
@@ -48,8 +52,14 @@ export default {
       count3: {
         x: 0, // => podemos declarar uma propriedade dentro do objeto
       },
+      // declarando as variaveis do computed:
       firstName: 'Rodrigo',
       lastName: 'Fernandes',
+
+      // declarando uma variável do Watchers:
+      apiResponse: 'Start',
+      text: '',
+
     };
   },
   // função mounted() é colocado quando o componente for montado.
@@ -85,6 +95,24 @@ possui getters and setters e so alteram quando a propriedade é alterada */
       // aqui no escopo methods não funciona arrow functions:
       // eslint-disable-next-line no-plusplus
       this.count += value;
+    },
+    simulateApi(response) {
+      return new Promise(() => {
+        setTimeout(() => {
+          this.apiResponse = response;
+        }, 1000);
+      });
+    },
+    async fetchApi(value) {
+      await this.simulateApi(value);
+    },
+  },
+  //
+  watch: {
+    text() { /* método para tipar a variavel text  do data().
+recebe dois parametros: O novo valor e o valor antigo */
+      this.fetchApi(Math.random()); /* chamei minha api e sempre que eu mudar o valor do text,
+o valor da api vai mostrar um random automatico */
     },
   },
 
