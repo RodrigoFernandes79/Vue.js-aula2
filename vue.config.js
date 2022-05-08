@@ -1,5 +1,6 @@
-/* eslint-disable */
-module.exports = {
-    runtimeCompiler: true,
+const { defineConfig } = require('@vue/cli-service');
 
-};
+module.exports = defineConfig({
+  lintOnSave: false,
+  transpileDependencies: true,
+});
